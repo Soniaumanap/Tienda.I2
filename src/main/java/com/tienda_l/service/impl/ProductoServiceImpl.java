@@ -41,4 +41,25 @@ public class ProductoServiceImpl
     public void deleteProducto(Producto producto) {
         productoDao.delete(producto);
     }
+    
+    //Esta consulta ampliada utiliza el metodo Query
+    @Override
+    @Transactional(readOnly=true)
+    public List<Producto>metodoQuery(double precioInf,double precioSup){
+        return productoDao.findByPrecioBetweenOrderByDescripcion(precioInf, precioSup);
+    }
+    
+    //Esta consulta ampliada utiliza el metodo lengiaje JPQL 
+    @Override
+    @Transactional(readOnly=true)
+    public List<Producto> metodoJPQL(double precioInf,double precioSup){
+        return productoDao.metodoJPQL(precioInf, precioSup);
+    }
+    
+    //Esta consulta utiliza el lenguaje SQL
+    @Override
+    @Transactional(readOnly=true)
+    public List<Producto> metodoNativo(double precioInf,double precioSup){
+        return productoDao.metodoNativo(precioInf, precioSup);
+    }
 }

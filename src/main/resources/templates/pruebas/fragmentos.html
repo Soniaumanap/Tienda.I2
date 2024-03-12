@@ -8,7 +8,6 @@
     <body>
         <!-- 1 Sección para crear los tabs de las categorias-->
         <section th:fragment="tabsCategorias" id="categorias">
-            aca van los tabs...
             <div class="row py-4">
                 <ul class="nav nav-tabs"> 
                     <li class="nav-item">
@@ -48,6 +47,102 @@
                             </div>
 
                             </section>
-                            </body>
-                            </html>
+                            <!-- 3 Sección para crear los tabs de las categorias-->
+                            <section th:fragment="filtros" 
+                                     <div class="row py-4">
+                                    <div class="col-md-">
+                                        <form method="POST" th:action="@{/pruebas/query1}">
+                                            <div class ="card">
+                                                <div class="card-footer text center">
+                                                    <button type="submit"
+                                                            class="btn btn-primary">
+                                                        <i class="fas-fa-check"></i> [[#{pruebas.ampliadas}]]
+                                                    </button>
+                                                </div>
+                                                <div class ="card-body">
+                                                    <div class ="mb-3">
+                                                        <label for="fechaInf">[[#{pruebas.precio.inferior}]]</label>
+                                                        <input type="number"
+                                                               th:value="${precioInf}"
+                                                               th:name="precioInf"
+                                                               required="true"/>
+                                                    </div> 
+                                                    <div class ="mb-3">
+                                                        <label for="fechaInf">[[#{pruebas.precio.superior}]]</label>
+                                                        <input type="number"
+                                                               th:value="${precioSup}"
+                                                               th:name="precioSup"
+                                                               required="true"/>
+                                                    </div> 
+                                                </div>  
+                                            </div>
+                                        </form>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-">
+                                    <form method="POST" th:action="@{/pruebas/query2}">
+                                        <div class ="card">
+                                            <div class="card-footer text center">
+                                                <button type="submit"
+                                                        class="btn btn-primary">
+                                                    <i class="fas-fa-check"></i> [[#{pruebas.JPQL}]]
+                                                </button>
+                                            </div>
+                                            <div class ="card-body">
+                                                <div class ="mb-3">
+                                                    <label for="fechaInf">[[#{pruebas.precio.inferior}]]</label>
+                                                    <input type="number"
+                                                           th:value="${precioInf}"
+                                                           th:name="precioInf"
+                                                           required="true"/>
+                                                </div> 
+                                                <div class ="mb-3">
+                                                    <label for="fechaSup">[[#{pruebas.precio.superior}]]</label>
+                                                    <input type="number"
+                                                           th:value="${precioSup}"
+                                                           th:name="precioSup"
+                                                           required="true"/>
+                                                </div> 
+                                            </div>  
+                                        </div>
+                                    </form>
+                                       <div class="col-md-">
+                                        <form method="POST" th:action="@{/pruebas/query1}">
+                                            <div class ="card">
+                                                <div class="card-footer text center">
+                                                    <button type="submit"
+                                                            class="btn btn-primary">
+                                                        <i class="fas-fa-check"></i> [[#{pruebas.nativo}]]
+                                                    </button>
+                                                </div>
+                                                <div class ="card-body">
+                                                    <div class ="mb-3">
+                                                        <label for="fechaInf">[[#{pruebas.precio.inferior}]]</label>
+                                                        <input type="number"
+                                                               th:value="${precioInf}"
+                                                               th:name="precioInf"
+                                                               required="true"/>
+                                                    </div> 
+                                                    <div class ="mb-3">
+                                                        <label for="fechaInf">[[#{pruebas.precio.superior}]]</label>
+                                                        <input type="number"
+                                                               th:value="${precioSup}"
+                                                               th:name="precioSup"
+                                                               required="true"/>
+                                                    </div> 
+                                                </div>  
+                                            </div>
+                                        </form>
+
+
+                                    </div>
+
+
+                                </div>
+    </section>
+
+                                </body>
+                                </html>
 

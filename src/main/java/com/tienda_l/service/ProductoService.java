@@ -18,4 +18,13 @@ public interface ProductoService {
     //se elimina un registro de la tabla producto a partir del idProducto que nos pasan
     public void deleteProducto(Producto producto);
     
+    //Esta consulta ampliada utiliza el metodo Query
+    public List<Producto>metodoQuery(double precioInf,double precioSup);
+    
+    //Esta consulta ampliada utiliza el metodo lengiaje JPQL 
+    public List<Producto> metodoJPQL(double precioInf,double precioSup);
+    
+    //Esta consulta utiliza el lenguaje SQL
+    public List<Producto> metodoNativo(double precioInf,double precioSup);
+    
 }
