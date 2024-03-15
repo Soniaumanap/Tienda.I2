@@ -11,24 +11,25 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CategoriaServiceImpl
         implements CategoriaService {
-     {
+
+    {
     }
     @Autowired
     private CategoriaDao categoriaDao;
 
     @Override
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public List<Categoria> getCategorias(boolean activos) {
-        var lista=categoriaDao.findAll();
-        if (activos){//si solo quiero los activos
-            lista.removeIf(c-> !c.isActivo());
-            
+        var lista = categoriaDao.findAll();
+        if (activos) {//si solo quiero los activos
+            lista.removeIf(c -> !c.isActivo());
+
         }
         return lista;
     }
 
     @Override
-    public Categoria getCateroria(Categoria categoria) {
+    public Categoria getCategoria(Categoria categoria) {
         return categoriaDao.findById(categoria.getIdCategoria()).orElse(null);
     }
 
@@ -40,5 +41,12 @@ public class CategoriaServiceImpl
     @Override
     public void deleteCategoria(Categoria categoria) {
         categoriaDao.delete(categoria);
+    }
+
+    //Esta consulta ampliada utiliza el metodo lengiaje JPQL 
+    @Override
+    @Transactional(readOnly = true)
+    public List<Categoria> metodoJPQL(int idCategoriaInf, int idCategoriaSup) {
+        return categoriaDao.metodoJPQL(idCategoriaInf, idCategoriaSup);
     }
 }

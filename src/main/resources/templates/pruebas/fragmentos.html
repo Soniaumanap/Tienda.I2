@@ -6,143 +6,226 @@
         <title>TechShop</title>
     </head>
     <body>
-        <!-- 1 Sección para crear los tabs de las categorias-->
+        <!-- 1 Seccion para crear los tabs de las categorias-->
         <section th:fragment="tabsCategorias" id="categorias">
             <div class="row py-4">
-                <ul class="nav nav-tabs"> 
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="/pruebas/listado"
-                           >[[#{pruebas.todas}]]</a>
+                           href="/pruebas/listado">
+                            [[#{pruebas.todas}]]
+                        </a>
                     </li>
-                    <li th:each="c : ${categorias}"
+                    <li th:each="c: ${categorias}"
                         class="nav-item">
                         <a class="nav-link"
-                           th:href="@{/pruebas/listado/}+${c.idCategoria}
-                           >[[#{pruebas.todas}]]</a>
-                           </li>
+                           th:href="@{/pruebas/listado/} + ${c.idCategoria}">
+                            [[${c.descripcion}]]
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
 
-                           </ul>
-                           </div>
-                           </section>
 
-                           <!-- 2 Fragmento para el listado de productos en bonito -->
-                           <section th:fragment="listadoProductos" id="productos>
-                           <div class="row row-cols-3"> 
-                            <div class="card p-2" th:each="p : $ {productos}">
-                                <figure>
-                                    <img th:src="${p.rutaimagen}"
-                                         height="200" alt="alt"/>
-                                    <figcaption>
-                                        [[${p.precio}]] ([[${p.existencias}]])
-                                    </figcaption>
-                                </figure>
-                                <div class="card-header">
-                                    <<h4 class="card-title">[[${p.descripcion}]]</h4>
+        <!-- 2 Fragmento para listado productos en bonito -->
+        <section th:fragment="listadoProductos" id="productos">
+            <div class="row row-cols-3">
+                <div class="card p-2" th:each="p : ${productos}">
+                    <figure>
+                        <img th:src="${p.rutaImagen}"  height="200" alt="alt"/>
+                        <figcaption>
+                            [[${p.precio}]]  ([[${p.existencias}]])
+                        </figcaption>
+                    </figure>
+                    <div class="card-header">
+                        <h4 class="card-title">[[${p.descripcion}]]</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">[[${p.detalle}]]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3 Seccion para crear los filtros de las consultas por precion-->
+        <section th:fragment="filtros">
+            <div class="row py-4">
+                <div class="col-md-4">
+                    <form method="POST" 
+                          th:action="@{/pruebas/query1}">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="fechaInf">
+                                        [[#{pruebas.precio.inferior}]]
+                                        <input type="number"
+                                               class="form-control"
+                                               th:value="${precioInf}"
+                                               th:name="precioInf"
+                                               required="true"/>
+                                    </label>
                                 </div>
-                                <div class="card-body">
-                                    <p class="card-text">[[${p.detalle}]]</p>
 
+                                <div class="mb-3">
+                                    <label for="fechaSup">
+                                        [[#{pruebas.precio.superior}]]
+                                        <input type="number"
+                                               class="form-control"
+                                               th:value="${precioSup}"
+                                               th:name="precioSup"
+                                               required="true"/>
+                                    </label>
                                 </div>
                             </div>
+                            <div class="card-footer text-center">
+                                <button type="submit" 
+                                        class="btn btn-primary">
+                                    <i class="fas-fa-check">[[#{pruebas.ampliadas}]]</i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
-                            </section>
-                            <!-- 3 Sección para crear los tabs de las categorias-->
-                            <section th:fragment="filtros" 
-                                     <div class="row py-4">
-                                    <div class="col-md-">
-                                        <form method="POST" th:action="@{/pruebas/query1}">
-                                            <div class ="card">
-                                                <div class="card-footer text center">
-                                                    <button type="submit"
-                                                            class="btn btn-primary">
-                                                        <i class="fas-fa-check"></i> [[#{pruebas.ampliadas}]]
-                                                    </button>
-                                                </div>
-                                                <div class ="card-body">
-                                                    <div class ="mb-3">
-                                                        <label for="fechaInf">[[#{pruebas.precio.inferior}]]</label>
-                                                        <input type="number"
-                                                               th:value="${precioInf}"
-                                                               th:name="precioInf"
-                                                               required="true"/>
-                                                    </div> 
-                                                    <div class ="mb-3">
-                                                        <label for="fechaInf">[[#{pruebas.precio.superior}]]</label>
-                                                        <input type="number"
-                                                               th:value="${precioSup}"
-                                                               th:name="precioSup"
-                                                               required="true"/>
-                                                    </div> 
-                                                </div>  
-                                            </div>
-                                        </form>
-
-
-                                    </div>
+                <div class="col-md-4">
+                    <form method="POST" 
+                          th:action="@{/pruebas/query2}">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="fechaInf">
+                                        [[#{pruebas.precio.inferior}]]
+                                        <input type="number"
+                                               class="form-control"
+                                               th:value="${precioInf}"
+                                               th:name="precioInf"
+                                               required="true"/>
+                                    </label>
                                 </div>
-                                <div class="col-md-">
-                                    <form method="POST" th:action="@{/pruebas/query2}">
-                                        <div class ="card">
-                                            <div class="card-footer text center">
-                                                <button type="submit"
-                                                        class="btn btn-primary">
-                                                    <i class="fas-fa-check"></i> [[#{pruebas.JPQL}]]
-                                                </button>
-                                            </div>
-                                            <div class ="card-body">
-                                                <div class ="mb-3">
-                                                    <label for="fechaInf">[[#{pruebas.precio.inferior}]]</label>
-                                                    <input type="number"
-                                                           th:value="${precioInf}"
-                                                           th:name="precioInf"
-                                                           required="true"/>
-                                                </div> 
-                                                <div class ="mb-3">
-                                                    <label for="fechaSup">[[#{pruebas.precio.superior}]]</label>
-                                                    <input type="number"
-                                                           th:value="${precioSup}"
-                                                           th:name="precioSup"
-                                                           required="true"/>
-                                                </div> 
-                                            </div>  
-                                        </div>
-                                    </form>
-                                       <div class="col-md-">
-                                        <form method="POST" th:action="@{/pruebas/query1}">
-                                            <div class ="card">
-                                                <div class="card-footer text center">
-                                                    <button type="submit"
-                                                            class="btn btn-primary">
-                                                        <i class="fas-fa-check"></i> [[#{pruebas.nativo}]]
-                                                    </button>
-                                                </div>
-                                                <div class ="card-body">
-                                                    <div class ="mb-3">
-                                                        <label for="fechaInf">[[#{pruebas.precio.inferior}]]</label>
-                                                        <input type="number"
-                                                               th:value="${precioInf}"
-                                                               th:name="precioInf"
-                                                               required="true"/>
-                                                    </div> 
-                                                    <div class ="mb-3">
-                                                        <label for="fechaInf">[[#{pruebas.precio.superior}]]</label>
-                                                        <input type="number"
-                                                               th:value="${precioSup}"
-                                                               th:name="precioSup"
-                                                               required="true"/>
-                                                    </div> 
-                                                </div>  
-                                            </div>
-                                        </form>
 
-
-                                    </div>
-
-
+                                <div class="mb-3">
+                                    <label for="fechaSup">
+                                        [[#{pruebas.precio.superior}]]
+                                        <input type="number"
+                                               class="form-control"
+                                               th:value="${precioSup}"
+                                               th:name="precioSup"
+                                               required="true"/>
+                                    </label>
                                 </div>
-    </section>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button type="submit" 
+                                        class="btn btn-primary">
+                                    <i class="fas-fa-check">[[#{pruebas.jpql}]]</i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="col-md-4">
+                    <form method="POST" 
+                          th:action="@{/pruebas/query3}">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="fechaInf">
+                                        [[#{pruebas.precio.inferior}]]
+                                        <input type="number"
+                                               class="form-control"
+                                               th:value="${precioInf}"
+                                               th:name="precioInf"
+                                               required="true"/>
+                                    </label>
+                                </div>
 
-                                </body>
-                                </html>
+                                <div class="mb-3">
+                                    <label for="fechaSup">
+                                        [[#{pruebas.precio.superior}]]
+                                        <input type="number"
+                                               class="form-control"
+                                               th:value="${precioSup}"
+                                               th:name="precioSup"
+                                               required="true"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button type="submit" 
+                                        class="btn btn-primary">
+                                    <i class="fas-fa-check">[[#{pruebas.nativo}]]</i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- 4 Seccion para crear los filtros de las consultas por categorias-->
+        <section th:fragment="filtrosCategoria">
+            <div class="row py-4">
+                
+
+                <div class="col-md-4">
+                    <form method="POST" 
+                          th:action="@{/pruebas/query4}">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="fechaInf">
+                                        ID Categoria Inferior
+                                        <input type="number"
+                                               class="form-control"
+                                               th:value="${idCategoriaInf}"
+                                               th:name="idCategoriaInf"
+                                               required="true"/>
+                                    </label>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="fechaSup">
+                                        ID Categoria Superior
+                                        <input type="number"
+                                               class="form-control"
+                                               th:value="${idCategoriaSup}"
+                                               th:name="idCategoriaSup"
+                                               required="true"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button type="submit" 
+                                        class="btn btn-primary">
+                                    <i class="fas-fa-check">[[#{pruebas.jpql}]]</i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 5 Fragmento para listado categorias en bonito -->
+        <section th:fragment="listadoCategoria" id="categorias">
+            <div class="row row-cols-3">
+                <div class="card p-2" th:each="c : ${categorias}">
+                    <figure>
+                        <img th:src="${c.rutaImagen}"  height="200" alt="alt"/>
+                        <figcaption>
+                             <p class="card-text">Activo</p>
+                        </figcaption>
+                    </figure>
+                    <div class="card-header">
+                        <h4 class="card-title">[[${c.descripcion}]]</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </body>
+</html>
 

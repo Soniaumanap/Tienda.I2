@@ -52,7 +52,7 @@ public class CategoriaController {
 
     @GetMapping("/modificar/{idCategoria}")
     public String modifica(Categoria categoria, Model model) {
-        categoria = categoriaService.getCateroria(categoria);
+        categoria = categoriaService.getCategoria(categoria);
         model.addAttribute("categoria", categoria);
         return "redirect:/categoria/modifica";
 

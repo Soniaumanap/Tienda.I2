@@ -8,7 +8,7 @@ public interface CategoriaService {
     public List<Categoria> getCategorias(boolean activos);
     
     //se obtiene un objeto categoria a partir del idCategoria que nos pasan
-    public Categoria getCateroria(Categoria categoria);
+    public Categoria getCategoria(Categoria categoria);
     
     //se hace lo siguiente:
     //si idCategoria tiene un valor se actualiza
@@ -17,5 +17,9 @@ public interface CategoriaService {
    
     //se elimina un registro de la tabla categoria a partir del idCategoria que nos pasan
     public void deleteCategoria(Categoria categoria);
+    
+    //Esta consulta ampliada utiliza el metodo lengiaje JPQL 
+    public List<Categoria> metodoJPQL(int idCategoriaInf,int idCategoriaSup);
+    
     
 }
