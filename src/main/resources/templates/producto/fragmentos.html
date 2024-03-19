@@ -84,9 +84,9 @@
                                             <td>[[${contador.count}]]</td>
                                             <td>[[${producto.descripcion}]]</td>
                                             <td th:text="${producto.activo} ? 'Activa' : 'Inactiva'" />
-                                            <td><a th:href="@{/producto/eliminar/}+${producto.idProducto}"
-                                                   class="btn btn-danger">
-                                                    <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
+                                            <td sec:authorize="hasRole('ROLE_ADMIN')><a th:href="@{/producto/eliminar/}+${producto.idProducto}"
+                                                class="btn btn-danger">
+                                                <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
                                                 <a th:href="@{/producto/modificar/}+${producto.idProducto}"
                                                    class="btn btn-success">
                                                     <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]</a></td></tr>

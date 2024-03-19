@@ -1,26 +1,49 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
         <title>lapagina</title> 
     </head>
     <body>        
         <header th:replace="~{layout/plantilla :: header}"/>
+        <div class="row m-5 justify-content-md-center">
+            <div class="cold-md-4">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h2>[[#{login.login}]]</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" th:action="@{/login}">
+                            <div class="row my-3 form-group">
+                                <label class="cold-md-5" for="username">
+                                    <i class="fas-fa-user-lock"></i> [[#{login.username}]]
+                                </label>
+                                <div class="cold-md-7">
+                                    <input class="form-control" type="text" name="username"/>
+                                </div>
+                            </div>
+
+                            <div class="row my-3 form-group">
+                                <label class="cold-md-5" for="username">
+                                    <i class="fas fa-key"></i> [[#{login.password}]]
+                                </label>
+                                <div class="cold-md-7">
+                                    <input class="form-control" type="password" name="password"/>
+                                </div>
+                            </div>
+                            <div class="card-footer col text-center">
+                                <button class="btn btn-sucess" type="submit">
+                                    <i class="fas fa-sign-in-alt"></i> [[#{login.login}]]
+                                </button>
+                            </div> 
 
 
-
-        <form method="POST" th:action="@{/login}">
-            <input type="text" name="username"/>
-
-            <br/>
-
-            <input type="password" name="password"/>
-
-            <input type="submit" name="Login" />
-        </form>
-
-
-
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <footer th:replace="~{layout/plantilla :: footer}"/>
-    </body>
+         </body>
 </html>
