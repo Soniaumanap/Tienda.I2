@@ -29,6 +29,6 @@ public class Usuario implements Serializable {
     private boolean activo;
     
     @OneToMany
-    @Column(name = "id_usuario")
+    @JoinColumn(name = "id_usuario")
     private List<Rol> roles;
 }

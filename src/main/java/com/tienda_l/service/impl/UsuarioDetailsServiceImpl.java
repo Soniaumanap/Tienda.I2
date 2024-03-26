@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("userDetailsService")
 public class UsuarioDetailsServiceImpl
@@ -24,8 +25,10 @@ public class UsuarioDetailsServiceImpl
     private UsuarioDao usuarioDao;
      @Autowired
     private HttpSession session;
+     
 
     @Override
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
         //se busca el usuario por el username
@@ -35,7 +38,7 @@ public class UsuarioDetailsServiceImpl
             throw new UsernameNotFoundException(username);
         }
         //si se encontro el usuario..
-        session.removeAttribute("usuarioImagen");
+        session.removeAttribute("imagenUsuario");
         session.setAttribute("imagenUsuario", usuario.getRutaImagen());
         
        //se deben recuperar los roles del usuario y crearlos como roles

@@ -55,30 +55,27 @@ public class ProjectConfig implements WebMvcConfigurer {
 
     @Bean
     public SecurityFilterChain
-            securityFilterChain(HttpSecurity http) throws Exception {
+            securityFilterChain(HttpSecurity http) throws Exception { //estructura de permisos dependiendo del rol
 
         http.authorizeHttpRequests((request) -> request
                 .requestMatchers("/", "/index",
-                        "/carrito/", "/registro/", "/js/",
-                        "/webjars/")
+                        "/carrito/**", "registro/**",
+                        "/js/**", "/webjars/**")
                 .permitAll()
                 .requestMatchers("/producto/nuevo",
-                        "/producto/modificar/*",
-                        "/producto/eliminar/",
-                        "/producto/guardar/",
+                        "/producto/modificar/**",
+                        "/producto/eliminar/**",
+                        "producto/guardar/**",
                         "/categoria/nuevo",
-                        "/categoria/modificar/*",
-                        "/categoria/eliminar/",
-                        "/categoria/guardar/",
-                        "/pruebas/")
+                        "/categoria/modificar/**",
+                        "/categoria/eliminar/**",
+                        "categoria/guardar/**",
+                        "pruebas/**")
                 .hasRole("ADMIN")
                 .requestMatchers("/producto/listado",
-                        "/categoria/listado",
-                        "/categoria/modificar/*",
-                        "/categoria/eliminar/",
-                        "/categoria/guardar/")
+                        "/categoria/listado")
                 .hasAnyRole("ADMIN", "VENDEDOR")
-                .requestMatchers("/facturar/carrito")
+                .requestMatchers("/facturas/carrito")
                 .hasRole("USER")
         )
                 .formLogin((form) -> form
@@ -109,8 +106,8 @@ public class ProjectConfig implements WebMvcConfigurer {
     }
      */
     @Autowired
-       private UserDetailsService userDetailsService;
-    
+    private UserDetailsService userDetailsService;
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder build)
             throws Exception {
